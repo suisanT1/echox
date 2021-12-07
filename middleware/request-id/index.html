@@ -697,11 +697,15 @@
   <span style="color:#75715e">// Generator defines a function to generate an ID.
 </span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value random.String(32).
 </span><span style="color:#75715e"></span>  <span style="color:#a6e22e">Generator</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">string</span>
+
+  <span style="color:#75715e">// TargetHeader defines what header to look for to populate the id
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">TargetHeader</span> <span style="color:#66d9ef">string</span>
 }
 </code></pre></div><p><em>Default Configuration</em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">DefaultRequestIDConfig</span> = <span style="color:#a6e22e">RequestIDConfig</span>{
   <span style="color:#a6e22e">Skipper</span>:   <span style="color:#a6e22e">DefaultSkipper</span>,
   <span style="color:#a6e22e">Generator</span>: <span style="color:#a6e22e">generator</span>,
+  <span style="color:#a6e22e">TargetHeader</span>: <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">HeaderXRequestID</span>,
 }
 </code></pre></div><h2 id="set-id">Set ID<a href="#set-id" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p>You can set the id from the requester with the <code>X-Request-ID</code>-Header</p>
