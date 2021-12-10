@@ -724,11 +724,11 @@ type of errors and logs the error. The name of the error page should be like <co
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">he</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">err</span>.(<span style="color:#f92672">*</span><span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">HTTPError</span>); <span style="color:#a6e22e">ok</span> {
 		<span style="color:#a6e22e">code</span> = <span style="color:#a6e22e">he</span>.<span style="color:#a6e22e">Code</span>
 	}
+	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Logger</span>().<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">err</span>)
 	<span style="color:#a6e22e">errorPage</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%d.html&#34;</span>, <span style="color:#a6e22e">code</span>)
 	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">File</span>(<span style="color:#a6e22e">errorPage</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
 		<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Logger</span>().<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">err</span>)
 	}
-	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Logger</span>().<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">err</span>)
 }
 
 <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">HTTPErrorHandler</span> = <span style="color:#a6e22e">customHTTPErrorHandler</span>
