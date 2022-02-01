@@ -13,8 +13,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://echo.labstack.com/cookbook</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-</description>
+      <description></description>
     </item>
     
     <item>
@@ -325,17 +324,12 @@ for that each middleware has an option to define a function &lt;code&gt;Skipper 
     </item>
     
     <item>
-      <title>Support Echo | Echo - High performance, minimalist Go web framework</title>
-      <link>https://echo.labstack.com/support-echo</link>
+      <title>V5s | Echo - High performance, minimalist Go web framework</title>
+      <link>https://echo.labstack.com/v5</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://echo.labstack.com/support-echo</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;Echo is an MIT licensed open source project and completely free to use. If you are
-using Echo in your products/projects, please consider sponsoring Echo to ensure
-it is actively developed and maintained.&lt;/p&gt;
-</description>
+      <guid>https://echo.labstack.com/v5</guid>
+      <description></description>
     </item>
     
   </channel>
