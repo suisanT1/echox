@@ -748,25 +748,25 @@
 
                         <p>Trace requests on Echo framework with Jaeger Tracing Middleware.</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-)
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable tracing middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
-
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-</code></pre></div><p>Enabling the tracing middleware creates a tracer and a root tracing span for every request.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable tracing middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Enabling the tracing middleware creates a tracer and a root tracing span for every request.</p>
 <h2 id="custom-configuration">Custom Configuration<a href="#custom-configuration" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p>By default, traces are sent to <code>localhost</code> Jaeger agent instance. To configure an external Jaeger, start your application with environment variables.</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ JAEGER_AGENT_HOST<span style="color:#f92672">=</span>192.168.1.10 JAEGER_AGENT_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">6831</span> ./myserver
-</code></pre></div><p>The tracer can be initialized with values coming from environment variables. None of the env vars are required
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ JAEGER_AGENT_HOST<span style="color:#f92672">=</span>192.168.1.10 JAEGER_AGENT_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">6831</span> ./myserver
+</span></span></code></pre></div><p>The tracer can be initialized with values coming from environment variables. None of the env vars are required
 and all of them can be overriden via direct setting of the property on the configuration object.</p>
 <table>
 <thead>
@@ -854,86 +854,86 @@ variables.</p>
 <h3 id="middleware-skipper">Middleware Skipper<a href="#middleware-skipper" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>A middleware skipper can be passed to avoid tracing spans to certain URLs:</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;strings&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-)
-
-<span style="color:#75715e">// urlSkipper ignores metrics route on some middleware
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">urlSkipper</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">bool</span> {
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Path</span>(), <span style="color:#e6db74">&#34;/testurl&#34;</span>) {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-    }
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable tracing middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">urlSkipper</span>)
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
-
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-</code></pre></div><h3 id="tracefunction">TraceFunction<a href="#tracefunction" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;strings&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// urlSkipper ignores metrics route on some middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">urlSkipper</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Path</span>(), <span style="color:#e6db74">&#34;/testurl&#34;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable tracing middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">urlSkipper</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="tracefunction">TraceFunction<a href="#tracefunction" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>This is a wrapper function that can be used to seamlessly add a span for
 the duration of the invoked function. There is no need to change function arguments.</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-    <span style="color:#e6db74">&#34;net/http&#34;</span>
-    <span style="color:#e6db74">&#34;time&#34;</span>
-)
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable tracing middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-        <span style="color:#75715e">// Wrap slowFunc on a new span to trace it&#39;s execution passing the function arguments
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">TraceFunction</span>(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">slowFunc</span>, <span style="color:#e6db74">&#34;Test String&#34;</span>)
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
-    })
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-
-<span style="color:#75715e">// A function to be wrapped. No need to change it&#39;s arguments due to tracing
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">slowFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) {
-	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">200</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
-	<span style="color:#66d9ef">return</span>
-}
-</code></pre></div><h3 id="createchildspan">CreateChildSpan<a href="#createchildspan" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable tracing middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Wrap slowFunc on a new span to trace it&#39;s execution passing the function arguments
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">TraceFunction</span>(<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">slowFunc</span>, <span style="color:#e6db74">&#34;Test String&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// A function to be wrapped. No need to change it&#39;s arguments due to tracing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">slowFunc</span>(<span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">200</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="createchildspan">CreateChildSpan<a href="#createchildspan" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>For more control over the Span, the function <code>CreateChildSpan</code> can be called
 giving control on data to be appended to the span like log messages, baggages and tags.</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-)
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable tracing middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-        <span style="color:#75715e">// Do something before creating the child span
-</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">40</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
-        <span style="color:#a6e22e">sp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">CreateChildSpan</span>(<span style="color:#a6e22e">c</span>, <span style="color:#e6db74">&#34;Child span for additional processing&#34;</span>)
-        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">Finish</span>()
-        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">LogEvent</span>(<span style="color:#e6db74">&#34;Test log&#34;</span>)
-        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">SetBaggageItem</span>(<span style="color:#e6db74">&#34;Test baggage&#34;</span>, <span style="color:#e6db74">&#34;baggage&#34;</span>)
-        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">SetTag</span>(<span style="color:#e6db74">&#34;Test tag&#34;</span>, <span style="color:#e6db74">&#34;New Tag&#34;</span>)
-        <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
-    })
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-</code></pre></div><p><em>References</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/jaegertracing&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable tracing middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">New</span>(<span style="color:#a6e22e">e</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Do something before creating the child span
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">40</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sp</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">jaegertracing</span>.<span style="color:#a6e22e">CreateChildSpan</span>(<span style="color:#a6e22e">c</span>, <span style="color:#e6db74">&#34;Child span for additional processing&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">Finish</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">LogEvent</span>(<span style="color:#e6db74">&#34;Test log&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">SetBaggageItem</span>(<span style="color:#e6db74">&#34;Test baggage&#34;</span>, <span style="color:#e6db74">&#34;baggage&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">sp</span>.<span style="color:#a6e22e">SetTag</span>(<span style="color:#e6db74">&#34;Test tag&#34;</span>, <span style="color:#e6db74">&#34;New Tag&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>References</em>:</p>
 <ul>
 <li>Opentracing Library: <a href="https://github.com/opentracing/opentracing-go">https://github.com/opentracing/opentracing-go</a></li>
 <li>Jaeger configuration: <a href="https://github.com/jaegertracing/jaeger-client-go#environment-variables">https://github.com/jaegertracing/jaeger-client-go#environment-variables</a></li>

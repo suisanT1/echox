@@ -791,42 +791,42 @@ in, or user previously visited pages of the website). Cookies can also store for
 </table>
 <p>Echo uses go standard <code>http.Cookie</code> object to add/retrieve cookies from the context received in the handler function.</p>
 <h2 id="create-a-cookie">Create a Cookie<a href="#create-a-cookie" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeCookie</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">cookie</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Cookie</span>)
-	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;username&#34;</span>
-	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span> = <span style="color:#e6db74">&#34;jon&#34;</span>
-	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Expires</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Hour</span>)
-	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">SetCookie</span>(<span style="color:#a6e22e">cookie</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;write a cookie&#34;</span>)
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">writeCookie</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cookie</span> <span style="color:#f92672">:=</span> new(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Cookie</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;username&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span> = <span style="color:#e6db74">&#34;jon&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Expires</span> = <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Hour</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">SetCookie</span>(<span style="color:#a6e22e">cookie</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;write a cookie&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>Cookie is created using <code>new(http.Cookie)</code>.</li>
 <li>Attributes for the cookie are set assigning to the <code>http.Cookie</code> instance public attributes.</li>
 <li>Finally <code>c.SetCookie(cookie)</code> adds a <code>Set-Cookie</code> header in HTTP response.</li>
 </ul>
 <h2 id="read-a-cookie">Read a Cookie<a href="#read-a-cookie" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readCookie</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">cookie</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cookie</span>(<span style="color:#e6db74">&#34;username&#34;</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
-	}
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;read a cookie&#34;</span>)
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readCookie</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cookie</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cookie</span>(<span style="color:#e6db74">&#34;username&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;read a cookie&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>Cookie is read by name using <code>c.Cookie(&quot;username&quot;)</code> from the HTTP request.</li>
 <li>Cookie attributes are accessed using <code>Getter</code> function.</li>
 </ul>
 <h2 id="read-all-the-cookies">Read all the Cookies<a href="#read-all-the-cookies" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readAllCookies</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">cookie</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cookies</span>() {
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span>)
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span>)
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;read all the cookies&#34;</span>)
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">readAllCookies</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">cookie</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Cookies</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Name</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">Value</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;read all the cookies&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
                     </section>
                     <footer>
                         Caught a mistake?

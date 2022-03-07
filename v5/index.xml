@@ -13,8 +13,7 @@
       
       <guid>https://echo.labstack.com/v5/guide/</guid>
       <description>Quick Start Installing v5.0.0-alpha branch $ mkdir myapp &amp;amp;&amp;amp; cd myapp $ go mod init myapp $ go get github.com/labstack/echo/v5@v5_alpha Hello, World! Create server.go
-package main import ( &amp;#34;github.com/labstack/echo/v5&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; ) func main() { e := echo.New() e.GET(&amp;#34;/&amp;#34;, func(c echo.Context) error { return c.JSON(http.StatusOK, &amp;#34;OK&amp;#34;) }) if err := e.Start(&amp;#34;:1323&amp;#34;); err != http.ErrServerClosed { log.Fatal(err) } } Start server
-$ go run server.go Browse to http://localhost:1323 and you should see Hello, World!</description>
+package main  import (  &amp;#34;github.com/labstack/echo/v5&amp;#34;  &amp;#34;log&amp;#34;  &amp;#34;net/http&amp;#34; )  func main() {  e := echo.New()  e.GET(&amp;#34;/&amp;#34;, func(c echo.Context) error {  return c.JSON(http.StatusOK, &amp;#34;OK&amp;#34;)  })   if err := e.Start(&amp;#34;:1323&amp;#34;); err != http.ErrServerClosed {  log.Fatal(err)  } } Start server</description>
     </item>
     
     <item>

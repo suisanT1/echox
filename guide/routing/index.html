@@ -751,14 +751,14 @@ to reuse memory and achieve zero dynamic memory allocation with no GC overhead.<
 <p>Routes can be registered by specifying HTTP method, path and a matching handler.
 For example, code below registers a route for method <code>GET</code>, path <code>/hello</code> and a
 handler which sends <code>Hello, World!</code> HTTP response.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Handler
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-  	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
-}
-
-<span style="color:#75715e">// Route
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">hello</span>)
-</code></pre></div><p>You can use <code>Echo.Any(path string, h Handler)</code> to register a handler for all HTTP methods.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>  	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Route
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">hello</span>)
+</span></span></code></pre></div><p>You can use <code>Echo.Any(path string, h Handler)</code> to register a handler for all HTTP methods.
 If you want to register it for some methods use <code>Echo.Match(methods []string, path string, h Handler)</code>.</p>
 <p>Echo defines handler function as <code>func(echo.Context) error</code> where <code>echo.Context</code> primarily
 holds HTTP request and response interfaces.</p>
@@ -778,18 +778,18 @@ match:</p>
 <li>Match any</li>
 </ul>
 <p><em>Example</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/:id&#34;</span>)
-})
-
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/new&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/new&#34;</span>)
-})
-
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/1/files/*&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/1/files/*&#34;</span>)
-})
-</code></pre></div><p>Above routes would resolve in the following order:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/:id&#34;</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/new&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/new&#34;</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/1/files/*&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;/users/1/files/*&#34;</span>)
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><p>Above routes would resolve in the following order:</p>
 <ul>
 <li><code>/users/new</code></li>
 <li><code>/users/:id</code></li>
@@ -806,94 +806,94 @@ To add middleware later in the group you can use <code>Group.Use(m ...Middleware
 Groups can also be nested.</p>
 <p>In the code below, we create an admin group which requires basic HTTP authentication
 for routes <code>/admin/*</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">g</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Group</span>(<span style="color:#e6db74">&#34;/admin&#34;</span>)
-<span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">BasicAuth</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">password</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;joe&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;secret&#34;</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>, <span style="color:#66d9ef">nil</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">nil</span>
-}))
-</code></pre></div><h2 id="route-naming">Route Naming<a href="#route-naming" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">g</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Group</span>(<span style="color:#e6db74">&#34;/admin&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">g</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">BasicAuth</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">password</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) (<span style="color:#66d9ef">bool</span>, <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">username</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;joe&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;secret&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>, <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>}))
+</span></span></code></pre></div><h2 id="route-naming">Route Naming<a href="#route-naming" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p>Each of the registration methods returns a <code>Route</code> object, which can be used to name a route after the registration. For example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">route</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">POST</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-})
-<span style="color:#a6e22e">route</span>.<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;create-user&#34;</span>
-
-<span style="color:#75715e">// or using the inline syntax
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-}).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;get-user&#34;</span>
-</code></pre></div><p>Route names can be very useful when generating URIs from the templates, where you can&rsquo;t access the handler references or when you have multiple routes with the same handler.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">route</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">POST</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">route</span>.<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;create-user&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// or using the inline syntax
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;get-user&#34;</span>
+</span></span></code></pre></div><p>Route names can be very useful when generating URIs from the templates, where you can&rsquo;t access the handler references or when you have multiple routes with the same handler.</p>
 <h2 id="uri-building">URI Building<a href="#uri-building" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p><code>Echo#URI(handler HandlerFunc, params ...interface{})</code> can be used to generate URI for any handler with specified path parameters. It&rsquo;s helpful to centralize all your
 URI patterns which ease in refactoring your application.</p>
 <p>For example, <code>e.URI(h, 1)</code> will generate <code>/users/1</code> for the route registered below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Handler
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;OK&#34;</span>)
-}
-
-<span style="color:#75715e">// Route
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#a6e22e">h</span>)
-</code></pre></div><p>In addition to <code>Echo#URI</code>, there is also <code>Echo#Reverse(name string, params ...interface{})</code> which is used to generate URIs based on the route name. For example a call to <code>Echo#Reverse(&quot;foobar&quot;, 1234)</code> would generate the URI <code>/users/1234</code> if the <code>foobar</code> route is registered like below:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Handler
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;OK&#34;</span>)
-}
-
-<span style="color:#75715e">// Route
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#a6e22e">h</span>).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;foobar&#34;</span>
-</code></pre></div><h2 id="list-routes">List Routes<a href="#list-routes" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;OK&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Route
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#a6e22e">h</span>)
+</span></span></code></pre></div><p>In addition to <code>Echo#URI</code>, there is also <code>Echo#Reverse(name string, params ...interface{})</code> which is used to generate URIs based on the route name. For example a call to <code>Echo#Reverse(&quot;foobar&quot;, 1234)</code> would generate the URI <code>/users/1234</code> if the <code>foobar</code> route is registered like below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Handler
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;OK&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Route
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users/:id&#34;</span>, <span style="color:#a6e22e">h</span>).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;foobar&#34;</span>
+</span></span></code></pre></div><h2 id="list-routes">List Routes<a href="#list-routes" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p><code>Echo#Routes() []*Route</code> can be used to list all registered routes in the order
 they are defined. Each route contains HTTP method, path and an associated handler.</p>
 <p><em>Example</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// Handlers
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">findUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">updateUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">deleteUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-}
-
-<span style="color:#75715e">// Routes
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">POST</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">createUser</span>)
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">findUser</span>)
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">PUT</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">updateUser</span>)
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">DELETE</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">deleteUser</span>)
-</code></pre></div><p>Using the following code you can output all the routes to a JSON file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">MarshalIndent</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Routes</span>(), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;  &#34;</span>)
-<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
-}
-<span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#e6db74">&#34;routes.json&#34;</span>, <span style="color:#a6e22e">data</span>, <span style="color:#ae81ff">0644</span>)
-</code></pre></div><p><code>routes.json</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[
-  {
-    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;POST&#34;</span>,
-    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.createUser&#34;</span>
-  },
-  {
-    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;GET&#34;</span>,
-    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.findUser&#34;</span>
-  },
-  {
-    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;PUT&#34;</span>,
-    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.updateUser&#34;</span>
-  },
-  {
-    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;DELETE&#34;</span>,
-    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.deleteUser&#34;</span>
-  }
-]
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Handlers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">findUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">updateUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">deleteUser</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Routes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">POST</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">createUser</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">findUser</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">PUT</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">updateUser</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">DELETE</span>(<span style="color:#e6db74">&#34;/users&#34;</span>, <span style="color:#a6e22e">deleteUser</span>)
+</span></span></code></pre></div><p>Using the following code you can output all the routes to a JSON file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">data</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">MarshalIndent</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Routes</span>(), <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;  &#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#e6db74">&#34;routes.json&#34;</span>, <span style="color:#a6e22e">data</span>, <span style="color:#ae81ff">0644</span>)
+</span></span></code></pre></div><p><code>routes.json</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;POST&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.createUser&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;GET&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.findUser&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;PUT&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.updateUser&#34;</span>
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;DELETE&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;main.deleteUser&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div>
                     </section>
                     <footer>
                         Caught a mistake?

@@ -755,11 +755,11 @@ the website trusts.</p>
 <p><code>e.Use(middleware.CSRF())</code></p>
 <h2 id="custom-configuration">Custom Configuration<a href="#custom-configuration" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">CSRFWithConfig</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">CSRFConfig</span>{
-  <span style="color:#a6e22e">TokenLookup</span>: <span style="color:#e6db74">&#34;header:X-XSRF-TOKEN&#34;</span>,
-}))
-</code></pre></div><p>Example above uses <code>X-XSRF-TOKEN</code> request header to extract CSRF token.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">CSRFWithConfig</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">CSRFConfig</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TokenLookup</span>: <span style="color:#e6db74">&#34;header:X-XSRF-TOKEN&#34;</span>,
+</span></span><span style="display:flex;"><span>}))
+</span></span></code></pre></div><p>Example above uses <code>X-XSRF-TOKEN</code> request header to extract CSRF token.</p>
 <h2 id="accessing-csrf-token">Accessing CSRF Token<a href="#accessing-csrf-token" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <h3 id="server-side">Server-side<a href="#server-side" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>CSRF token can be accessed from <code>Echo#Context</code> using <code>ContextKey</code> and passed to
@@ -767,61 +767,61 @@ the client via template.</p>
 <h3 id="client-side">Client-side<a href="#client-side" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>CSRF token can be accessed from CSRF cookie.</p>
 <h2 id="configuration">Configuration<a href="#configuration" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">CSRFConfig</span> <span style="color:#66d9ef">struct</span> {
-  <span style="color:#75715e">// Skipper defines a function to skip middleware.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">Skipper</span> <span style="color:#a6e22e">Skipper</span>
-
-  <span style="color:#75715e">// TokenLength is the length of the generated token.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">TokenLength</span> <span style="color:#66d9ef">uint8</span> <span style="color:#e6db74">`json:&#34;token_length&#34;`</span>
-  <span style="color:#75715e">// Optional. Default value 32.
-</span><span style="color:#75715e"></span>
-  <span style="color:#75715e">// TokenLookup is a string in the form of &#34;&lt;source&gt;:&lt;key&gt;&#34; that is used
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// to extract token from the request.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;header:X-CSRF-Token&#34;.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Possible values:
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;header:&lt;name&gt;&#34;
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;form:&lt;name&gt;&#34;
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;query:&lt;name&gt;&#34;
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">TokenLookup</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;token_lookup&#34;`</span>
-
-  <span style="color:#75715e">// Context key to store generated CSRF token into context.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;csrf&#34;.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ContextKey</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;context_key&#34;`</span>
-
-  <span style="color:#75715e">// Name of the CSRF cookie. This cookie will store CSRF token.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;_csrf&#34;.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieName</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_name&#34;`</span>
-
-  <span style="color:#75715e">// Domain of the CSRF cookie.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value none.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieDomain</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_domain&#34;`</span>
-
-  <span style="color:#75715e">// Path of the CSRF cookie.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value none.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookiePath</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_path&#34;`</span>
-
-  <span style="color:#75715e">// Max age (in seconds) of the CSRF cookie.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value 86400 (24hr).
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieMaxAge</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;cookie_max_age&#34;`</span>
-
-  <span style="color:#75715e">// Indicates if CSRF cookie is secure.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value false.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieSecure</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;cookie_secure&#34;`</span>
-
-  <span style="color:#75715e">// Indicates if CSRF cookie is HTTP only.
-</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value false.
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieHTTPOnly</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;cookie_http_only&#34;`</span>
-}
-</code></pre></div><p><em>Default Configuration</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">DefaultCSRFConfig</span> = <span style="color:#a6e22e">CSRFConfig</span>{
-  <span style="color:#a6e22e">Skipper</span>:      <span style="color:#a6e22e">DefaultSkipper</span>,
-  <span style="color:#a6e22e">TokenLength</span>:  <span style="color:#ae81ff">32</span>,
-  <span style="color:#a6e22e">TokenLookup</span>:  <span style="color:#e6db74">&#34;header:&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">HeaderXCSRFToken</span>,
-  <span style="color:#a6e22e">ContextKey</span>:   <span style="color:#e6db74">&#34;csrf&#34;</span>,
-  <span style="color:#a6e22e">CookieName</span>:   <span style="color:#e6db74">&#34;_csrf&#34;</span>,
-  <span style="color:#a6e22e">CookieMaxAge</span>: <span style="color:#ae81ff">86400</span>,
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">CSRFConfig</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Skipper defines a function to skip middleware.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">Skipper</span> <span style="color:#a6e22e">Skipper</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// TokenLength is the length of the generated token.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">TokenLength</span> <span style="color:#66d9ef">uint8</span> <span style="color:#e6db74">`json:&#34;token_length&#34;`</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Optional. Default value 32.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// TokenLookup is a string in the form of &#34;&lt;source&gt;:&lt;key&gt;&#34; that is used
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// to extract token from the request.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;header:X-CSRF-Token&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Possible values:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;header:&lt;name&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;form:&lt;name&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// - &#34;query:&lt;name&gt;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">TokenLookup</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;token_lookup&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Context key to store generated CSRF token into context.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;csrf&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">ContextKey</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;context_key&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Name of the CSRF cookie. This cookie will store CSRF token.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value &#34;_csrf&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieName</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_name&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Domain of the CSRF cookie.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value none.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieDomain</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_domain&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Path of the CSRF cookie.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value none.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookiePath</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;cookie_path&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Max age (in seconds) of the CSRF cookie.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value 86400 (24hr).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieMaxAge</span> <span style="color:#66d9ef">int</span> <span style="color:#e6db74">`json:&#34;cookie_max_age&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Indicates if CSRF cookie is secure.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value false.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieSecure</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;cookie_secure&#34;`</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Indicates if CSRF cookie is HTTP only.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// Optional. Default value false.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">CookieHTTPOnly</span> <span style="color:#66d9ef">bool</span> <span style="color:#e6db74">`json:&#34;cookie_http_only&#34;`</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>Default Configuration</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">DefaultCSRFConfig</span> = <span style="color:#a6e22e">CSRFConfig</span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Skipper</span>:      <span style="color:#a6e22e">DefaultSkipper</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TokenLength</span>:  <span style="color:#ae81ff">32</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TokenLookup</span>:  <span style="color:#e6db74">&#34;header:&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">HeaderXCSRFToken</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ContextKey</span>:   <span style="color:#e6db74">&#34;csrf&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">CookieName</span>:   <span style="color:#e6db74">&#34;_csrf&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">CookieMaxAge</span>: <span style="color:#ae81ff">86400</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
                     </section>
                     <footer>
                         Caught a mistake?

@@ -751,92 +751,92 @@ with data and sends a text/html response with status code. Templates can be regi
 <ol>
 <li>
 <p>Implement <code>echo.Renderer</code> interface</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Template</span> <span style="color:#66d9ef">struct</span> {
-    <span style="color:#a6e22e">templates</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Template</span>
-}
-
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Template</span>) <span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">data</span>)
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Template</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">templates</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Template</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Template</span>) <span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>Pre-compile templates</p>
 <p><code>public/views/hello.html</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">{{define &#34;hello&#34;}}Hello, {{.}}!{{end}}
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Template</span>{
-    <span style="color:#a6e22e">templates</span>: <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#e6db74">&#34;public/views/*.html&#34;</span>)),
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{define &#34;hello&#34;}}Hello, {{.}}!{{end}}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Template</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">templates</span>: <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#e6db74">&#34;public/views/*.html&#34;</span>)),
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>Register templates</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Renderer</span> = <span style="color:#a6e22e">t</span>
-<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">Hello</span>)
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Renderer</span> = <span style="color:#a6e22e">t</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">Hello</span>)
+</span></span></code></pre></div></li>
 <li>
 <p>Render a template inside your handler</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#e6db74">&#34;World&#34;</span>)
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;hello&#34;</span>, <span style="color:#e6db74">&#34;World&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="advanced---calling-echo-from-templates">Advanced - Calling Echo from templates<a href="#advanced---calling-echo-from-templates" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h3>
 <p>In certain situations it might be useful to generate URIs from the templates. In order to do so, you need to call <code>Echo#Reverse</code> from the templates itself. Golang&rsquo;s <code>html/template</code> package is not the best suited for this job, but this can be done in two ways: by providing a common method on all objects passed to templates or by passing <code>map[string]interface{}</code> and augmenting this object in the custom renderer. Given the flexibility of the latter approach, here is a sample program:</p>
 <p><code>template.html</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">html</span>&gt;
-    &lt;<span style="color:#f92672">body</span>&gt;
-        &lt;<span style="color:#f92672">h1</span>&gt;Hello {{index . &#34;name&#34;}}&lt;/<span style="color:#f92672">h1</span>&gt;
-
-        &lt;<span style="color:#f92672">p</span>&gt;{{ with $x := index . &#34;reverse&#34; }}
-           {{ call $x &#34;foobar&#34; }} &amp;lt;-- this will call the $x with parameter &#34;foobar&#34;
-           {{ end }}
-        &lt;/<span style="color:#f92672">p</span>&gt;
-    &lt;/<span style="color:#f92672">body</span>&gt;
-&lt;/<span style="color:#f92672">html</span>&gt;
-</code></pre></div><p><code>server.go</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;html/template&#34;</span>
-	<span style="color:#e6db74">&#34;io&#34;</span>
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
-
-	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-)
-
-<span style="color:#75715e">// TemplateRenderer is a custom html/template renderer for Echo framework
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TemplateRenderer</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">templates</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Template</span>
-}
-
-<span style="color:#75715e">// Render renders a template document
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TemplateRenderer</span>) <span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-
-	<span style="color:#75715e">// Add global methods if data is a map
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">viewContext</span>, <span style="color:#a6e22e">isMap</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">data</span>.(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}); <span style="color:#a6e22e">isMap</span> {
-		<span style="color:#a6e22e">viewContext</span>[<span style="color:#e6db74">&#34;reverse&#34;</span>] = <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Echo</span>().<span style="color:#a6e22e">Reverse</span>
-	}
-
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">data</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-  <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-  <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">TemplateRenderer</span>{
-      <span style="color:#a6e22e">templates</span>: <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#e6db74">&#34;*.html&#34;</span>)),
-  }
-  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Renderer</span> = <span style="color:#a6e22e">renderer</span>
-
-  <span style="color:#75715e">// Named route &#34;foobar&#34;
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/something&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;template.html&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
-          <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Dolly!&#34;</span>,
-      })
-  }).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;foobar&#34;</span>
-
-  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:8000&#34;</span>))
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">html</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h1</span>&gt;Hello {{index . &#34;name&#34;}}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">p</span>&gt;{{ with $x := index . &#34;reverse&#34; }}
+</span></span><span style="display:flex;"><span>           {{ call $x &#34;foobar&#34; }} &amp;lt;-- this will call the $x with parameter &#34;foobar&#34;
+</span></span><span style="display:flex;"><span>           {{ end }}
+</span></span><span style="display:flex;"><span>        &lt;/<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">html</span>&gt;
+</span></span></code></pre></div><p><code>server.go</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;html/template&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;io&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// TemplateRenderer is a custom html/template renderer for Echo framework
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">TemplateRenderer</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">templates</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Template</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Render renders a template document
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">TemplateRenderer</span>) <span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">data</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Add global methods if data is a map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">viewContext</span>, <span style="color:#a6e22e">isMap</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">data</span>.(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}); <span style="color:#a6e22e">isMap</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">viewContext</span>[<span style="color:#e6db74">&#34;reverse&#34;</span>] = <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Echo</span>().<span style="color:#a6e22e">Reverse</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">templates</span>.<span style="color:#a6e22e">ExecuteTemplate</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">renderer</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">TemplateRenderer</span>{
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">templates</span>: <span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">Must</span>(<span style="color:#a6e22e">template</span>.<span style="color:#a6e22e">ParseGlob</span>(<span style="color:#e6db74">&#34;*.html&#34;</span>)),
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Renderer</span> = <span style="color:#a6e22e">renderer</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Named route &#34;foobar&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/something&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Render</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;template.html&#34;</span>, <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Dolly!&#34;</span>,
+</span></span><span style="display:flex;"><span>      })
+</span></span><span style="display:flex;"><span>  }).<span style="color:#a6e22e">Name</span> = <span style="color:#e6db74">&#34;foobar&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:8000&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
                     </section>
                     <footer>
                         Caught a mistake?

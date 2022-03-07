@@ -743,101 +743,101 @@
 
                         <p>Prometheus middleware generates metrics for HTTP requests.</p>
 <p><em>Usage</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
-)
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable metrics middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">nil</span>)
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">e</span>)
-
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-</code></pre></div><p><em>Sample Output</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl http://localhost:1323/metrics
-
-<span style="color:#75715e"># HELP echo_request_duration_seconds The HTTP request latencies in seconds.</span>
-<span style="color:#75715e"># TYPE echo_request_duration_seconds summary</span>
-echo_request_duration_seconds_sum 0.41086482
-echo_request_duration_seconds_count <span style="color:#ae81ff">1</span>
-<span style="color:#75715e"># HELP echo_request_size_bytes The HTTP request sizes in bytes.</span>
-<span style="color:#75715e"># TYPE echo_request_size_bytes summary</span>
-echo_request_size_bytes_sum <span style="color:#ae81ff">56</span>
-echo_request_size_bytes_count <span style="color:#ae81ff">1</span>
-<span style="color:#75715e"># HELP echo_requests_total How many HTTP requests processed, partitioned by status code and HTTP method.</span>
-<span style="color:#75715e"># TYPE echo_requests_total counter</span>
-echo_requests_total<span style="color:#f92672">{</span>code<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;200&#34;</span>,host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;localhost:8080&#34;</span>,method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;GET&#34;</span>,url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">}</span> <span style="color:#ae81ff">1</span>
-<span style="color:#75715e"># HELP echo_response_size_bytes The HTTP response sizes in bytes.</span>
-<span style="color:#75715e"># TYPE echo_response_size_bytes summary</span>
-echo_response_size_bytes_sum <span style="color:#ae81ff">61</span>
-echo_response_size_bytes_count <span style="color:#ae81ff">1</span>
-...
-</code></pre></div><h2 id="custom-configuration">Custom Configuration<a href="#custom-configuration" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable metrics middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">e</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>Sample Output</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl http://localhost:1323/metrics
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># HELP echo_request_duration_seconds The HTTP request latencies in seconds.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TYPE echo_request_duration_seconds summary</span>
+</span></span><span style="display:flex;"><span>echo_request_duration_seconds_sum 0.41086482
+</span></span><span style="display:flex;"><span>echo_request_duration_seconds_count <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># HELP echo_request_size_bytes The HTTP request sizes in bytes.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TYPE echo_request_size_bytes summary</span>
+</span></span><span style="display:flex;"><span>echo_request_size_bytes_sum <span style="color:#ae81ff">56</span>
+</span></span><span style="display:flex;"><span>echo_request_size_bytes_count <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># HELP echo_requests_total How many HTTP requests processed, partitioned by status code and HTTP method.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TYPE echo_requests_total counter</span>
+</span></span><span style="display:flex;"><span>echo_requests_total<span style="color:#f92672">{</span>code<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;200&#34;</span>,host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;localhost:8080&#34;</span>,method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;GET&#34;</span>,url<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">}</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># HELP echo_response_size_bytes The HTTP response sizes in bytes.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># TYPE echo_response_size_bytes summary</span>
+</span></span><span style="display:flex;"><span>echo_response_size_bytes_sum <span style="color:#ae81ff">61</span>
+</span></span><span style="display:flex;"><span>echo_response_size_bytes_count <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><h2 id="custom-configuration">Custom Configuration<a href="#custom-configuration" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p><em>Usage</em></p>
 <p>A middleware skipper can be passed to avoid generating metrics to certain URLs:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-<span style="color:#f92672">import</span> (
-    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
-)
-
-<span style="color:#75715e">// urlSkipper middleware ignores metrics on some route
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">urlSkipper</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">bool</span> {
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Path</span>(), <span style="color:#e6db74">&#34;/testurl&#34;</span>) {
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-    <span style="color:#75715e">// Enable metrics middleware
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#a6e22e">urlSkipper</span>)
-    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">e</span>)
-
-    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
-}
-</code></pre></div><h2 id="complex-scenarios">Complex scenarios<a href="#complex-scenarios" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// urlSkipper middleware ignores metrics on some route
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">urlSkipper</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">HasPrefix</span>(<span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Path</span>(), <span style="color:#e6db74">&#34;/testurl&#34;</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Enable metrics middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#a6e22e">urlSkipper</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">e</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:1323&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="complex-scenarios">Complex scenarios<a href="#complex-scenarios" class="hanchor" ariaLabel="Anchor"> 🔗</a> </h2>
 <p>Serve /metrics endpoint separately from main server</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
-
-	<span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
-	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
-	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4/middleware&#34;</span>
-)
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#75715e">// Setup Main Server
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoMainServer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">HideBanner</span> = <span style="color:#66d9ef">true</span>
-	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">Logger</span>())
-	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">hello</span>)
-
-	<span style="color:#75715e">// Create Prometheus server and Middleware
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoPrometheus</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
-	<span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">HideBanner</span> = <span style="color:#66d9ef">true</span>
-	<span style="color:#a6e22e">prom</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">nil</span>)
-
-	<span style="color:#75715e">// Scrape metrics from Main Server
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">prom</span>.<span style="color:#a6e22e">HandlerFunc</span>)
-	<span style="color:#75715e">// Setup metrics endpoint at another server
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">prom</span>.<span style="color:#a6e22e">SetMetricsPath</span>(<span style="color:#a6e22e">echoPrometheus</span>)
-
-	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:9360&#34;</span>)) }()
-
-	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>))
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/labstack/echo-contrib/prometheus&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/labstack/echo/v4/middleware&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Setup Main Server
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoMainServer</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">HideBanner</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">middleware</span>.<span style="color:#a6e22e">Logger</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">GET</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">hello</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Create Prometheus server and Middleware
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoPrometheus</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">New</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">HideBanner</span> = <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">prom</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">prometheus</span>.<span style="color:#a6e22e">NewPrometheus</span>(<span style="color:#e6db74">&#34;echo&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Scrape metrics from Main Server
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">prom</span>.<span style="color:#a6e22e">HandlerFunc</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Setup metrics endpoint at another server
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">prom</span>.<span style="color:#a6e22e">SetMetricsPath</span>(<span style="color:#a6e22e">echoPrometheus</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">echoPrometheus</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:9360&#34;</span>)) }()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Logger</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">echoMainServer</span>.<span style="color:#a6e22e">Start</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>))
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hello</span>(<span style="color:#a6e22e">c</span> <span style="color:#a6e22e">echo</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">String</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusOK</span>, <span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
                     </section>
                     <footer>
                         Caught a mistake?
