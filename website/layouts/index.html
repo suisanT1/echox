@@ -6,6 +6,7 @@
   </div>
 	<div class="w3-content">
 	  <div class="main">
+      {{ partial "code.html" . }}
       <div class="w3-row-padding">
         <div class="w3-col s12 m10 l10">
           <div class="hero">
@@ -35,7 +36,7 @@
             {{ end }}
           </div>
 
-          <h2 style="margin-top: 32px;">Sponsors</h2>
+          <a href="https://github.com/sponsors/labstack"><h2 style="margin-top: 32px;">Sponsors</h2></a>
           <div class="sponsors">
             {{ range .Site.Data.index.sponsors }}
               <div class="sponsor">
