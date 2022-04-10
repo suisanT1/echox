@@ -422,6 +422,7 @@ ul.breadcrumb li + li:before {
     margin-top: 32px
 }
 
+.sponsors h3,
 .features h3 {
     margin: 0;
     font-size: 20px;
@@ -439,6 +440,11 @@ ul.breadcrumb li + li:before {
 
 .feature i {
     font-size: 36px
+}
+
+.sponsors {
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .ad {

@@ -1,5 +1,6 @@
 heading = "Echo"
 description = "High performance, extensible, minimalist Go web framework"
+
 [[features]]
   icon = "rocket"
   title = "Optimized Router"
@@ -46,3 +47,7 @@ description = "High performance, extensible, minimalist Go web framework"
   title = "Extensible"
   text = "Customized central HTTP error handling. Easily extendable API."
 
+[[sponsors]]
+  logo = "https://shiguredo.jp/img/shiguredo_logo.png"
+  title = "Shiguredo Inc."
+  url = "https://shiguredo.jp"

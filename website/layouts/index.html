@@ -34,6 +34,20 @@
               </div>
             {{ end }}
           </div>
+
+          <h2 style="margin-top: 32px;">Sponsors</h2>
+          <div class="sponsors">
+            {{ range .Site.Data.index.sponsors }}
+              <div class="sponsor">
+                <h3>
+                  {{ .title }}
+                </h3>
+                <a href="{{ .url }}" target="_blank">
+                  <img src="{{ .logo }}" width="200" height="200">
+                </a>
+              </div>
+            {{ end }}
+          </div>
         </div>
 			</div>
 	  </div>

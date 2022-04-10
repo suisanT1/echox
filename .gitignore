@@ -2,3 +2,5 @@
 website/public
 vendor
 .idea
+.hugo_build.lock
+
