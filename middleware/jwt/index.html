@@ -757,6 +757,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">TokenLookup</span>: <span style="color:#e6db74">&#34;query:token&#34;</span>,
 </span></span><span style="display:flex;"><span>}))
 </span></span></code></pre></div><p><em>Usage with different JWT library/repository</em></p>
+<p>This middleware uses the <code>github.com/golang-jwt/jwt</code> library.</p>
 <p>To use a different JWT library you need to implement a custom <code>JWTConfig.ParseTokenFunc</code> function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
 </span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;github.com/golang-jwt/jwt&#34;</span> <span style="color:#75715e">// in this example we use `golang-jwt/jwt` as JWT implementation
