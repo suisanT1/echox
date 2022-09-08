@@ -51,3 +51,8 @@ description = "High performance, extensible, minimalist Go web framework"
   logo = "https://shiguredo.jp/img/shiguredo_logo.png"
   title = "Shiguredo Inc."
   url = "https://shiguredo.jp"
+
+[[sponsors]]
+  logo = "images/microcms.png"
+  title = "microCMS"
+  url = "https://microcms.co.jp"
